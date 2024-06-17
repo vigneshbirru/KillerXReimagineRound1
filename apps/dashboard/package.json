@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "dashboard",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@repo/db": "*",
     "@repo/ui": "*",
     "react": "19.0.0-rc-f994737d14-20240522",
     "react-dom": "19.0.0-rc-f994737d14-20240522",
