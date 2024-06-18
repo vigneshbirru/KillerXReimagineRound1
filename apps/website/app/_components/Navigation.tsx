@@ -4,7 +4,7 @@ import Link from 'next/link';
 const Navigation = () => {
   return (
     <div>
-      {/* <Image src="@/public/logo.png" width={100} height={100} alt="logo" /> */}
+      {/* <Image src="/public/logo.png" width={100} height={100} alt="logo" /> */}
       <Link href="/">The Wild Oasis</Link>
 
       <ul>

@@ -1,4 +1,17 @@
-const page = () => {
+import { NextPage } from 'next';
+import Filter from '../_components/Filter';
+import CabinList from '../_components/CabinList';
+import { Suspense } from 'react';
+import Spinner from '../_components/Spinner';
+
+interface PageProps {
+  searchParams: {
+    capacity?: string;
+  };
+}
+
+const Page: NextPage<PageProps> = ({ searchParams }) => {
+  const filter = searchParams?.capacity ?? 'all';
   return (
     <div>
       <div>
@@ -12,8 +25,12 @@ const page = () => {
           vacation. Welcome to paradise.
         </p>
       </div>
+      <Filter />
+      <Suspense fallback={<Spinner />} key={filter}>
+        <CabinList capacity={filter} />
+      </Suspense>
     </div>
   );
 };
 
-export default page;
+export default Page;
