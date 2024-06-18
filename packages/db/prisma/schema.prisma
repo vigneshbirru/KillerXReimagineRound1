@@ -19,3 +19,58 @@ model User {
   email String  @unique
   name  String?
 }
+
+model Cabins{
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  name String
+  maxCapacity String
+  regularPrice String
+  discount Int
+  description String
+  image String
+
+  bookings Bookings[]
+}
+
+model Guests{
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  fullName String
+  email String
+  nationalID String
+  nationality String
+  countryFlag String
+
+  bookings Bookings[]
+}
+
+model Settings{
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  minBookingLength Int
+  maxBookingLength Int
+  maxGuestsPerBooking Int
+  breakfastPrice Float
+}
+
+model Bookings{
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  startDate DateTime
+  endDate DateTime
+  numNights Int
+  numGuests Int
+  cabinPrice Float
+  extrasPrice Float
+  totalPrice Float
+  status String
+  hasBreakfast Boolean
+  isPaid Boolean
+  observations String
+  cabinId String
+  guestId String
+
+  cabins Cabins @relation(fields: [cabinId], references: [id])
+  guests Guests @relation(fields: [guestId], references: [id])
+}
