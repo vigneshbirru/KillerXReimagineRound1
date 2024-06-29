@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Josefin_Sans } from 'next/font/google';
 import './globals.css';
 import Navigation from './_components/Navigation';
 import { ReservationProvider } from './_components/ReservationContext';
+import Header from './_components/Header';
 
-const inter = Inter({ subsets: ['latin'] });
+const josefin = Josefin_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,9 +22,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Navigation />
-        <ReservationProvider>{children}</ReservationProvider>
+      <body
+        className={`${josefin.className} antialiased bg-primary-950 text-primary-100 min-h-screen flex flex-col relatives`}
+      >
+        <Header />
+        <div className="flex-1 px-8 py-12 grid">
+          <main className="max-w-7xl mx-auto w-full">
+            <ReservationProvider>{children}</ReservationProvider>
+          </main>
+        </div>
       </body>
     </html>
   );

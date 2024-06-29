@@ -1,26 +1,54 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { getAuthSession } from '../_lib/auth';
 
-const Navigation = () => {
+const Navigation = async () => {
+  const session = await getAuthSession();
   return (
-    <div className="flex gap-4">
-      {/* <Image src="/public/logo.png" width={100} height={100} alt="logo" /> */}
-      <Link href="/">The Wild Oasis</Link>
-
-      <ul className="flex gap-4">
+    <nav className="z-10 text-xl">
+      <ul className="flex gap-16 items-center">
         <li>
-          <Link href="/cabins">Cabins</Link>
+          <Link
+            href="/cabins"
+            className="hover:text-accent-400 transition-colors"
+          >
+            Cabins
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/about"
+            className="hover:text-accent-400 transition-colors"
+          >
+            About
+          </Link>
         </li>
 
         <li>
-          <Link href="/about">About</Link>
-        </li>
-
-        <li>
-          <Link href="/account">Guest area</Link>
+          {session?.user?.image ? (
+            <Link
+              href="/account"
+              className="hover:text-accent-400 transition-colors flex items-center gap-4"
+            >
+              <img
+                className="h-8 rounded-full"
+                src={session.user.image}
+                alt={session.user.name || ''}
+                referrerPolicy="no-referrer"
+              />
+              <span>Guest area</span>
+            </Link>
+          ) : (
+            <Link
+              href="/account"
+              className="hover:text-accent-400 transition-colors"
+            >
+              Guest area
+            </Link>
+          )}
         </li>
       </ul>
-    </div>
+    </nav>
   );
 };
 
