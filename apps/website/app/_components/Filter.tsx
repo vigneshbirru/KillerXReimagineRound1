@@ -15,7 +15,7 @@ const Filter = () => {
   }
 
   return (
-    <div>
+    <div className="border border-primary-800 flex">
       <Button
         filter="all"
         handleFilter={handleFilter}
@@ -64,7 +64,14 @@ const Button: FC<ButtonProps> = ({
   activeFilter,
   children,
 }) => {
-  return <button onClick={() => handleFilter(filter)}>{children}</button>;
+  return (
+    <button
+      className={`px-5 py-2 hover:bg-primary-800 transition-all duration-200 ${filter === activeFilter ? 'bg-primary-700 text-primary-50' : ''}`}
+      onClick={() => handleFilter(filter)}
+    >
+      {children}
+    </button>
+  );
 };
 
 export default Filter;

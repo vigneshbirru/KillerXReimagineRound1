@@ -9,6 +9,7 @@ import {
   isWithinInterval,
 } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
 
 interface DateSelectorProps {
   settings: {
@@ -87,8 +88,10 @@ const DateSelector: FC<DateSelectorProps> = ({
         numberOfMonths={2}
         disabled={(curDate) =>
           isPast(curDate) ||
-          //@ts-ignore
-          bookedDates.some((date) => isSameDay(date, curDate))
+          bookedDates.some((date) =>
+            //@ts-ignore
+            isSameDay(date, curDate),
+          )
         }
       />
 

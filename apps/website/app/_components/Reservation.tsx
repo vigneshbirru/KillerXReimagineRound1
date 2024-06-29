@@ -50,8 +50,7 @@ const Reservation: FC<ReservationProps> = async ({ cabin }) => {
 
   console.log(settings);
   return (
-    <div>
-      Reservation
+    <div className="grid grid-cols-2 border border-primary-800 min-h-[400px]">
       <DateSelector
         settings={settings[0]}
         //@ts-ignore

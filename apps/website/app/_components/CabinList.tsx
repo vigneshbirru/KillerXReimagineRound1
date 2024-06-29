@@ -1,6 +1,7 @@
 import { db } from '@repo/db/client';
 import Link from 'next/link';
 import React, { FC } from 'react';
+import CabinCard from './CabinCard';
 
 interface CabinListProps {
   capacity: string;
@@ -46,18 +47,10 @@ const CabinList: FC<CabinListProps> = async ({ capacity }) => {
   console.log(cabins);
 
   return (
-    <div>
-      <h1>Cabin List</h1>
-      <ul>
-        {cabins.map((cabin) => (
-          <li key={cabin.id}>
-            {cabin.name} - Capacity: {cabin.maxCapacity}
-            <Link href={`/cabins/${cabin.id}`}>
-              Details & reservation &rarr;
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
+      {cabins.map((cabin) => (
+        <CabinCard cabin={cabin} key={cabin.id} />
+      ))}
     </div>
   );
 };

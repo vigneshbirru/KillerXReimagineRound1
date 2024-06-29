@@ -72,15 +72,19 @@ const ReservationForm: FC<ReservationFormProps> = ({ cabin, user }) => {
               Select number of guests...
             </option>
 
-            {
-              //@ts-ignore
-              Array.from({ length: maxCapacity }, (_, i) => i + 1).map((x) => (
-                //@ts-ignore
-                <option value={x} key={x}>
-                  {x === 1 ? 'guest' : 'guests'}
-                </option>
-              ))
-            }
+            {(
+              Array.from(
+                {
+                  //@ts-ignore
+                  length: maxCapacity,
+                },
+                (_, i) => i + 1,
+              ) as number[]
+            ).map((x: number) => (
+              <option value={x} key={x}>
+                {x} {x === 1 ? 'guest' : 'guests'}
+              </option>
+            ))}
           </select>
         </div>
 
