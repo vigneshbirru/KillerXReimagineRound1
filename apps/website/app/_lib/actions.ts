@@ -3,6 +3,8 @@
 import { getAuthSession } from './auth';
 import { redirect } from 'next/navigation';
 import { db } from '@repo/db/client';
+import { signOut } from 'next-auth/react';
+import { revalidatePath } from 'next/cache';
 
 export async function createBooking(bookingData: any, formData: any) {
   const session = await getAuthSession();
@@ -29,4 +31,51 @@ export async function createBooking(bookingData: any, formData: any) {
   // revalidatePath(`/cabins/${bookingData.cabinId}`);
 
   redirect('/cabins/thankyou');
+}
+
+export async function updateBooking(formData: any) {
+  const bookingId = formData.get('bookingId');
+
+  // 1) Authentication
+  const session = await getAuthSession();
+  if (!session) throw new Error('You must be logged in');
+
+  // 2) Authorization
+  const guestBookings = await db.bookings.findMany({
+    where: {
+      //@ts-ignore
+      guestId: session.user.guestId,
+    },
+  });
+  const guestBookingIds = guestBookings.map((booking) => booking.id);
+
+  if (!guestBookingIds.includes(bookingId))
+    throw new Error('You are not allowed to update this booking');
+
+  const updateData = {
+    numGuests: Number(formData.get('numGuests')),
+    observations: formData.get('observations').slice(0, 1000),
+  };
+
+  const update = await db.bookings.update({
+    where: {
+      id: bookingId,
+    },
+    data: updateData,
+  });
+
+  revalidatePath(`/account/reservations/edit/${bookingId}`);
+  revalidatePath('/account/reservations');
+
+  // 7) Redirecting
+  redirect('/account/reservations');
+}
+
+export async function deleteBooking(id: string) {
+  const del = await db.bookings.delete({ where: { id } });
+  revalidatePath('/account/reservations');
+}
+
+export async function signOutAction() {
+  await signOut({ redirect: true, callbackUrl: '/' });
 }

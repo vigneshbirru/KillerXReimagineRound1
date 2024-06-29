@@ -5,7 +5,9 @@ import { signIn } from 'next-auth/react';
 const SignInButton = () => {
   return (
     <button
-      onClick={() => signIn('google', { redirectTo: '/account' })}
+      onClick={() =>
+        signIn('google', { redirect: true, callbackUrl: '/account' })
+      }
       className="flex items-center gap-6 text-lg border border-primary-300 px-10 py-4 font-medium"
     >
       <img

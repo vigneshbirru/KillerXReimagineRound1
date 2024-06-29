@@ -69,9 +69,6 @@ export const authOptions: NextAuthOptions = {
         guestId: existingGuest.id,
       };
     },
-    redirect() {
-      return '/account';
-    },
   },
 };
 
