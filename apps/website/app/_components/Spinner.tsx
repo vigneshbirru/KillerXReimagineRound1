@@ -3,7 +3,7 @@ import { FC } from 'react';
 interface SpinnerProps {}
 
 const Spinner: FC<SpinnerProps> = ({}) => {
-  return <div>Spinner...</div>;
+  return <div className="spinner"></div>;
 };
 
 export default Spinner;
