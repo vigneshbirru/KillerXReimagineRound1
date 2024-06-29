@@ -69,10 +69,10 @@ model Guests{
   id String @id @default(uuid())
   createdAt DateTime @default(now())
   fullName String
-  email String
-  nationalID String
-  nationality String
-  countryFlag String
+  email String @unique
+  nationalID String?
+  nationality String?
+  countryFlag String?
 
   bookings Bookings[]
 }

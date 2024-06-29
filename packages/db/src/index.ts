@@ -17,3 +17,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 export const db = prisma;
+
+export type { Cabins, User, Guests, Settings, Bookings } from '@prisma/client';

@@ -1,6 +1,9 @@
 import Link from 'next/link';
+import { getAuthSession } from './_lib/auth';
 
-const page = () => {
+const page = async () => {
+  const session = await getAuthSession();
+  console.log(session);
   return (
     <div>
       <div>

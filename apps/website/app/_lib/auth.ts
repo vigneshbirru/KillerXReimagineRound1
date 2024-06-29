@@ -26,8 +26,48 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email;
         // @ts-ignore
         session.user.image = token.picture;
+        //@ts-ignore
+        session.user.guestId = token.guestId;
       }
       return session;
+    },
+    async jwt({ token, user }) {
+      const dbUser = await db.user.findFirst({
+        where: {
+          email: token.email,
+        },
+      });
+
+      if (!dbUser) {
+        token.id = user!.id;
+        return token;
+      }
+
+      let existingGuest = await db.guests.findUnique({
+        where: {
+          //@ts-ignore
+          email: dbUser.email,
+        },
+      });
+
+      if (!existingGuest) {
+        existingGuest = await db.guests.create({
+          data: {
+            email: dbUser.email || '',
+            fullName: dbUser.name || '',
+          },
+        });
+      }
+
+      console.log(existingGuest);
+
+      return {
+        id: dbUser.id,
+        name: dbUser.name,
+        email: dbUser.email,
+        picture: dbUser.image,
+        guestId: existingGuest.id,
+      };
     },
     redirect() {
       return '/account';

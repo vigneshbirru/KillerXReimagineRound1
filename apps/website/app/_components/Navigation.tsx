@@ -3,11 +3,11 @@ import Link from 'next/link';
 
 const Navigation = () => {
   return (
-    <div>
+    <div className="flex gap-4">
       {/* <Image src="/public/logo.png" width={100} height={100} alt="logo" /> */}
       <Link href="/">The Wild Oasis</Link>
 
-      <ul>
+      <ul className="flex gap-4">
         <li>
           <Link href="/cabins">Cabins</Link>
         </li>

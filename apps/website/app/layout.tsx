@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Navigation from './_components/Navigation';
+import { ReservationProvider } from './_components/ReservationContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navigation />
-        {children}
+        <ReservationProvider>{children}</ReservationProvider>
       </body>
     </html>
   );

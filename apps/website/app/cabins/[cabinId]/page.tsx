@@ -1,5 +1,7 @@
+import Reservation from '@/app/_components/Reservation';
+import Spinner from '@/app/_components/Spinner';
 import { db } from '@repo/db/client';
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 
 interface pageProps {
   params: {
@@ -16,7 +18,14 @@ const page: FC<pageProps> = async ({ params }) => {
   const { cabinId } = params;
   const cabin = await getCabin(cabinId);
   console.log(cabin);
-  return <div>{cabinId}</div>;
+  return (
+    <div>
+      <h2>Reserver {cabin?.name} today. Pay on arrival</h2>
+      <Suspense fallback={<Spinner />}>
+        <Reservation cabin={cabin} />
+      </Suspense>
+    </div>
+  );
 };
 
 export default page;
