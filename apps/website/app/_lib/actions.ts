@@ -71,6 +71,29 @@ export async function updateBooking(formData: any) {
   redirect('/account/reservations');
 }
 
+export async function updateGuest(formData: any) {
+  const session = await getAuthSession();
+  if (!session) throw new Error('You must be logged in');
+
+  const nationalID = formData.get('nationalID');
+  const [nationality, countryFlag] = formData.get('nationality').split('%');
+
+  if (!/^[a-zA-Z0-9]{6,12}$/.test(nationalID))
+    throw new Error('Please provide a valid national ID');
+
+  const updateData = { nationality, countryFlag, nationalID };
+
+  const update = await db.guests.update({
+    where: {
+      //@ts-ignore
+      id: session.user.guestId,
+    },
+    data: updateData,
+  });
+
+  revalidatePath('/account/profile');
+}
+
 export async function deleteBooking(id: string) {
   const del = await db.bookings.delete({ where: { id } });
   revalidatePath('/account/reservations');
