@@ -24,17 +24,18 @@ interface DateSelectorProps {
 
 const isAlreadyBooked = (
   range: {
-    from: string | undefined;
-    to: string | undefined;
+    from: Date | undefined;
+    to: Date | undefined;
   },
   dateArr: Date[][],
 ) => {
   return (
     range.from &&
     range.to &&
-    dateArr.some((date) =>
-      //@ts-ignores
-      isWithinInterval(date, { start: range.from, end: range.to }),
+    dateArr.some((dateRange) =>
+      dateRange.some((date) =>
+        isWithinInterval(date, { start: range.from!, end: range.to! }),
+      ),
     )
   );
 };
@@ -51,13 +52,13 @@ const DateSelector: FC<DateSelectorProps> = ({
     resetRange,
   }: {
     range: {
-      from: string | undefined;
-      to: string | undefined;
+      from: Date | undefined;
+      to: Date | undefined;
     };
     setRange: Dispatch<
       SetStateAction<{
-        from: string | undefined;
-        to: string | undefined;
+        from: Date | undefined;
+        to: Date | undefined;
       }>
     >;
     resetRange: () => void;
@@ -66,7 +67,12 @@ const DateSelector: FC<DateSelectorProps> = ({
   const displayRange = isAlreadyBooked(range, bookedDates) ? {} : range;
   const { regularPrice, discount } = cabin;
   //@ts-ignore
-  const numNights = differenceInDays(displayRange.to, displayRange.from);
+  const numNights = differenceInDays(
+    //@ts-ignore
+    displayRange.to || new Date(),
+    //@ts-ignore
+    displayRange.from || new Date(),
+  );
   const cabinPrice = numNights * (Number(regularPrice) - discount);
   const { minBookingLength, maxBookingLength } = settings;
 
@@ -88,9 +94,8 @@ const DateSelector: FC<DateSelectorProps> = ({
         numberOfMonths={2}
         disabled={(curDate) =>
           isPast(curDate) ||
-          bookedDates.some((date) =>
-            //@ts-ignore
-            isSameDay(date, curDate),
+          bookedDates.some((dateRange) =>
+            dateRange.some((date) => isSameDay(date, curDate)),
           )
         }
       />
