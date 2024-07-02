@@ -1,5 +1,4 @@
 import { db } from '@repo/db/client';
-import Link from 'next/link';
 import React, { FC } from 'react';
 import CabinCard from './CabinCard';
 
@@ -47,7 +46,7 @@ const CabinList: FC<CabinListProps> = async ({ capacity }) => {
 
   return (
     <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
-      {cabins.map((cabin) => (
+      {cabins.map((cabin: any) => (
         <CabinCard cabin={cabin} key={cabin.id} />
       ))}
     </div>
