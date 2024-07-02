@@ -44,7 +44,6 @@ const CabinList: FC<CabinListProps> = async ({ capacity }) => {
   }
 
   const cabins = await getCabins(min, max);
-  console.log(cabins);
 
   return (
     <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">

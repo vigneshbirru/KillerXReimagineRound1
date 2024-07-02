@@ -18,7 +18,7 @@ const getCabin = async (id: string) => {
 const page: FC<pageProps> = async ({ params }) => {
   const { cabinId } = params;
   const cabin = await getCabin(cabinId);
-  console.log(cabin);
+
   return (
     <div className="max-w-6xl mx-auto mt-8">
       {

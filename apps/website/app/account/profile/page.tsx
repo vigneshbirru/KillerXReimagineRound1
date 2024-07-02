@@ -11,7 +11,6 @@ const getGuest = async (email: string) => {
 const page = async () => {
   const session = await getAuthSession();
   const guest = await getGuest(session?.user?.email || '');
-  console.log(guest);
 
   return (
     <div>

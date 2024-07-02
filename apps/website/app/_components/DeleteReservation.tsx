@@ -13,7 +13,6 @@ const DeleteReservation: FC<DeleteReservationProps> = ({
   bookingId,
   onDelete,
 }) => {
-  console.log(bookingId);
   const [isPending, startTransition] = useTransition();
 
   function handleDelete() {

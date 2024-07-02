@@ -30,7 +30,6 @@ const page: FC<pageProps> = async ({ params }) => {
   const { numGuests, observations, cabinId } = bookings;
   //@ts-ignore
   const { maxCapacity } = bookings.cabins;
-  console.log(maxCapacity);
 
   return (
     <div>

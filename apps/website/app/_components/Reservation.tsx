@@ -4,6 +4,7 @@ import { FC } from 'react';
 import DateSelector from './DateSelector';
 import ReservationForm from './ReservationForm';
 import { getAuthSession } from '../_lib/auth';
+import LoginMessage from './LoginMessage';
 
 interface ReservationProps {
   cabin: Cabins | null;
@@ -48,7 +49,6 @@ const Reservation: FC<ReservationProps> = async ({ cabin }) => {
     getBookedDatesByCabinId(cabin?.id || ''),
   ]);
 
-  console.log(settings);
   return (
     <div className="grid grid-cols-2 border border-primary-800 min-h-[400px]">
       <DateSelector
@@ -57,12 +57,17 @@ const Reservation: FC<ReservationProps> = async ({ cabin }) => {
         cabin={cabin}
         bookedDates={bookedDates}
       />
-      <ReservationForm
-        //@ts-ignore
-        cabin={cabin}
-        //@ts-ignore
-        user={session?.user}
-      />
+
+      {session?.user ? (
+        <ReservationForm
+          //@ts-ignore
+          cabin={cabin}
+          //@ts-ignore
+          user={session?.user}
+        />
+      ) : (
+        <LoginMessage />
+      )}
     </div>
   );
 };

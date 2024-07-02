@@ -5,7 +5,7 @@ import bg from '@/public/bg.png';
 
 const page = async () => {
   const session = await getAuthSession();
-  console.log(session);
+
   return (
     <main className="mt-24">
       <Image

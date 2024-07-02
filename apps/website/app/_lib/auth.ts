@@ -59,8 +59,6 @@ export const authOptions: NextAuthOptions = {
         });
       }
 
-      console.log(existingGuest);
-
       return {
         id: dbUser.id,
         name: dbUser.name,

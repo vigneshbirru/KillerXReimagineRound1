@@ -23,10 +23,8 @@ export async function createBooking(bookingData: any, formData: any) {
     status: 'unconfirmed',
   };
 
-  console.log(newBooking);
-
   const booking = await db.bookings.create({ data: newBooking });
-  console.log(booking);
+
   if (!booking) throw new Error('Booking could not be created');
   // revalidatePath(`/cabins/${bookingData.cabinId}`);
 
