@@ -13,7 +13,7 @@ const Logo = () => {
         alt="The wild oasis logo"
       />
       <span className="text-xl font-semibold text-primary-100">
-        The Wild Oasis
+        The Reykjavik EDITION
       </span>
     </Link>
   );
