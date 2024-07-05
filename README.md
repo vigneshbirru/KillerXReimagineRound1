@@ -1,3 +1,21 @@
+# Our Project:
+For the first round, we chose to re-imagine the The Reykjavik EDITION Brand website. Our goal was to enhance its user interface and user experience, making it more intuitive and visually appealing. We focused on incorporating modern design trends and ensuring the site is fully functional.
+
+# Key Highlights:
+
+🚀 Futuristic Design: 🌟 Enhance your booking experience! 🌟 Discover streamlined solutions that 
+prioritize user-friendly interfaces and seamless navigation. 
+💥 Seamless Interactivity: Streamline room reservations, prioritizing your comfort and convenience. 
+ Enhance your booking experience today!
+🛠Tech stack: Turborepo with Next Js, Prisma, Postgres, NextAuth and Tailwind Css
+🔗Check out our redesigned The Reykjavik EDITION website : https://hackthon-website.vercel.app/
+
+# Team Members:
+1)Vighnesh Birru
+2)Akash Mathad
+3)Aadesh Vishwakarma
+4)Sagar Suthar
+
 # Turborepo starter
 
 This is an official starter Turborepo.
